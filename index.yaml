@@ -3,6 +3,16 @@ entries:
   backstage:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-03-20T15:35:36.162476613Z"
+    description: A Helm chart for Backstage
+    digest: effbf1e0e1cd106bceb342db2cc45c257b0913e20a36b64bc68a172d312e4c3b
+    name: backstage
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/backstage-0.0.73/backstage-0.0.73.tgz
+    version: 0.0.73
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-03-20T14:29:29.263102723Z"
     description: A Helm chart for Backstage
     digest: 68554a7f2b10cc4b9774167075d444714d73f06a6c0d7a45862308ec0615e7c2
@@ -493,6 +503,16 @@ entries:
     - https://github.com/teknoir/profile-controller-helm/releases/download/deadend-0.0.17/deadend-0.0.17.tgz
     version: 0.0.17
   device-controller:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2026-03-20T15:35:36.417649286Z"
+    description: A Helm chart for the Teknoir device-controller
+    digest: ff52a7b46a63449cd20374adf7e37fc61aeaab078577c8871542474ce96a1818
+    name: device-controller
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/device-controller-0.0.73/device-controller-0.0.73.tgz
+    version: 0.0.73
   - apiVersion: v2
     appVersion: 1.0.0
     created: "2026-03-20T14:29:29.390754159Z"
@@ -1046,6 +1066,16 @@ entries:
   devstudio-controller:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-03-20T15:35:36.640763316Z"
+    description: A Helm chart for devstudio-controller
+    digest: 0429a6fae45eb2f8325eb44455c7c17ba43b9c7ec86b129659ada2b6b1dad4cd
+    name: devstudio-controller
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/devstudio-controller-0.0.73/devstudio-controller-0.0.73.tgz
+    version: 0.0.73
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-03-20T14:29:29.524578711Z"
     description: A Helm chart for devstudio-controller
     digest: 12761c6e91fbbfe6feceb3e683f2925689f3d8434cf95187e2519d9d27ac6530
@@ -1547,6 +1577,16 @@ entries:
   notebook-controller:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-03-20T15:35:36.927862809Z"
+    description: A Helm chart for notebook-controller
+    digest: 7e5ecfe9fff13398815d66148fa7cc96b473ce18577e0d099473f7e18c387740
+    name: notebook-controller
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/notebook-controller-0.0.73/notebook-controller-0.0.73.tgz
+    version: 0.0.73
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-03-20T14:29:29.704797754Z"
     description: A Helm chart for notebook-controller
     digest: abf5fd31dd56ffea88c1a466c528122083d9ae39d030b4e351ccc6444948d287
@@ -2046,6 +2086,16 @@ entries:
     - https://github.com/teknoir/profile-controller-helm/releases/download/notebook-controller-0.0.23/notebook-controller-0.0.23.tgz
     version: 0.0.23
   profile-controller:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2026-03-20T15:35:37.150769457Z"
+    description: A Helm chart for Teknoir Profile Controller
+    digest: 601689747da8c9a615cfc6d46f8b9007572ea6fb76b6039d61d1e3de1035897c
+    name: profile-controller
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/profile-controller-0.0.73/profile-controller-0.0.73.tgz
+    version: 0.0.73
   - apiVersion: v2
     appVersion: 1.0.0
     created: "2026-03-20T14:29:29.871643132Z"
@@ -2749,6 +2799,16 @@ entries:
   profile-plugin-deadend:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2026-03-20T15:35:37.380914514Z"
+    description: HelmChart to deploy the Deadend Bastion resources to a Teknoir Cluster.
+    digest: e14605f1bd317b79d71e3ff0cc4dff87de8dc62d81e21eb82d4814c210986d15
+    name: profile-plugin-deadend
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/profile-plugin-deadend-0.0.73/profile-plugin-deadend-0.0.73.tgz
+    version: 0.0.73
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2026-03-20T14:29:30.014904146Z"
     description: HelmChart to deploy the Deadend Bastion resources to a Teknoir Cluster.
     digest: b6b9501152d606e34ed3a19d7a7ab6d3df67c34662a668b158c850a7e820a7fb
@@ -3278,6 +3338,20 @@ entries:
     - https://github.com/teknoir/profile-controller-helm/releases/download/profile-plugin-deadend-0.0.19/profile-plugin-deadend-0.0.19.tgz
     version: 0.0.19
   profile-plugin-emqx:
+  - apiVersion: v2
+    appVersion: v5.8.9
+    created: "2026-03-20T15:35:37.610538861Z"
+    dependencies:
+    - name: emqx
+      repository: https://repos.emqx.io/charts
+      version: 5.8.9
+    description: A Helm chart for EMQX used by Profile Controller
+    digest: 7e3b1f8452dcdeea45ef153dcd47c9afefa6777eec1bc6fadae5041d1018271c
+    name: profile-plugin-emqx
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/profile-plugin-emqx-0.0.73/profile-plugin-emqx-0.0.73.tgz
+    version: 0.0.73
   - apiVersion: v2
     appVersion: v5.8.9
     created: "2026-03-20T14:29:30.182699655Z"
@@ -4191,6 +4265,16 @@ entries:
   profile-plugin-grafana:
   - apiVersion: v2
     appVersion: 12.3.3
+    created: "2026-03-20T15:35:37.838997475Z"
+    description: A Helm chart for Grafana used by Profile Controller
+    digest: b40a2aac5a49936130c31b2a254361a75f10d68c64845f9870f434d6ff1baf72
+    name: profile-plugin-grafana
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/profile-plugin-grafana-0.0.73/profile-plugin-grafana-0.0.73.tgz
+    version: 0.0.73
+  - apiVersion: v2
+    appVersion: 12.3.3
     created: "2026-03-20T14:29:30.381360305Z"
     description: A Helm chart for Grafana used by Profile Controller
     digest: 6539a1023c28bb05ca2246f5ec13ed69d95ded088f37ee8c57615bde587bd018
@@ -4802,6 +4886,17 @@ entries:
   profile-plugin-historian:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-03-20T15:35:38.122687722Z"
+    description: A Helm chart for the Historian plugin (API, Middle-End, Synchronizer
+      and MongoDB)
+    digest: cb7aa56dbb648bb072bb0c911ebd9c55830cc6b3d942d803bf8e5355dacfb392
+    name: profile-plugin-historian
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/profile-plugin-historian-0.0.73/profile-plugin-historian-0.0.73.tgz
+    version: 0.0.73
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-03-20T14:29:30.571656777Z"
     description: A Helm chart for the Historian plugin (API, Middle-End, Synchronizer
       and MongoDB)
@@ -5076,6 +5171,16 @@ entries:
     - https://github.com/teknoir/profile-controller-helm/releases/download/profile-plugin-historian-0.0.48/profile-plugin-historian-0.0.48.tgz
     version: 0.0.48
   profile-plugin-mongodb:
+  - apiVersion: v2
+    appVersion: v8.2.1
+    created: "2026-03-20T15:35:38.362887761Z"
+    description: A Helm chart for MongoDB used by Profile Controller
+    digest: 900c9d35a0539186351c0d981ad53d868bd1725081dbafee9d831e53bfd5562f
+    name: profile-plugin-mongodb
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/profile-plugin-mongodb-0.0.73/profile-plugin-mongodb-0.0.73.tgz
+    version: 0.0.73
   - apiVersion: v2
     appVersion: v8.2.1
     created: "2026-03-20T14:29:30.750376452Z"
@@ -5699,6 +5804,17 @@ entries:
   profile-plugin-observatory:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-03-20T15:35:38.560120228Z"
+    description: Observatory system for monitoring and evaluating detections from
+      devices.
+    digest: a9db30212b7d3a3abda83acedcdd32d0c1a9dd37e40df7c0868b4c754109e80b
+    name: profile-plugin-observatory
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/profile-plugin-observatory-0.0.73/profile-plugin-observatory-0.0.73.tgz
+    version: 0.0.73
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-03-20T14:29:30.928043419Z"
     description: Observatory system for monitoring and evaluating detections from
       devices.
@@ -5951,6 +6067,16 @@ entries:
     - https://github.com/teknoir/profile-controller-helm/releases/download/profile-plugin-observatory-0.0.50/profile-plugin-observatory-0.0.50.tgz
     version: 0.0.50
   profile-plugin-prometheus:
+  - apiVersion: v2
+    appVersion: v2.47.0
+    created: "2026-03-20T15:35:38.994440889Z"
+    description: A Helm chart for Prometheus used by Profile Controller
+    digest: 21f741f00f9c11381612c542f7b07d1b0bdc0b744d19c9294a7e9dae056b408a
+    name: profile-plugin-prometheus
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/profile-plugin-prometheus-0.0.73/profile-plugin-prometheus-0.0.73.tgz
+    version: 0.0.73
   - apiVersion: v2
     appVersion: v2.47.0
     created: "2026-03-20T14:29:31.107472964Z"
@@ -6654,6 +6780,16 @@ entries:
   user-controller:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-03-20T15:35:39.24708159Z"
+    description: A Helm chart for the Teknoir user-controller
+    digest: df55692f6240e09c9dfac45566d4e71dfddcfc4029740c23408b7e7b44296c40
+    name: user-controller
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-controller-helm/releases/download/user-controller-0.0.73/user-controller-0.0.73.tgz
+    version: 0.0.73
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-03-20T14:29:31.275764972Z"
     description: A Helm chart for the Teknoir user-controller
     digest: bc58b785a843684eb13778329a866d22070cedb8c01f385a88df0bcab907df33
@@ -7322,4 +7458,4 @@ entries:
     urls:
     - https://github.com/teknoir/profile-controller-helm/releases/download/user-controller-0.0.5/user-controller-0.0.5.tgz
     version: 0.0.5
-generated: "2026-03-20T14:29:31.277994334Z"
+generated: "2026-03-20T15:35:39.250844692Z"
