@@ -1,1 +1,1 @@
-# profile-controller-helm
+# profile-plugins-helm
