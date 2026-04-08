@@ -6,7 +6,7 @@ repository:
   name: profile-controller-helm
 
   # A short description of the repository that will show up on GitHub
-  description: Teknoir Profile Controller and Plugins Helm Chart
+  description: Teknoir Platform Application layer and Plugins Helm Chart
 
   # A URL with more information about the repository
   homepage: https://teknoir.ai
@@ -15,7 +15,7 @@ repository:
   topics: profile, teknoir, helm
 
   # Either `true` to make the repository private, or `false` to make it public.
-  private: false
+  private: true
 
   # Either `true` to enable issues for this repository, `false` to disable them.
   has_issues: true
@@ -82,6 +82,31 @@ teams:
 
 branches:
   - name: main
+    # https://docs.github.com/en/rest/reference/repos#update-branch-protection
+    # Branch Protection settings. Set to null to disable
+    protection:
+      # Required. Require at least one approving review on a pull request, before merging. Set to null to disable.
+      required_pull_request_reviews:
+        # The number of approvals required. (1-6)
+        required_approving_review_count: 1
+        # Dismiss approved reviews automatically when a new commit is pushed.
+        dismiss_stale_reviews: true
+        # Blocks merge until code owners have reviewed.
+        require_code_owner_reviews: false
+        # Specify which users and teams can dismiss pull request reviews. Pass an empty dismissal_restrictions object to disable. User and team dismissal_restrictions are only available for organization-owned repositories. Omit this parameter for personal repositories.
+        dismissal_restrictions:
+          users: []
+          teams: []
+      # Required. Require status checks to pass before merging. Set to null to disable
+      required_status_checks: null
+      # Required. Enforce all configured restrictions for administrators. Set to true to enforce required status checks for repository administrators. Set to null to disable.
+      enforce_admins: false
+      # Prevent merge commits from being pushed to matching branches
+      required_linear_history: false
+      # Required. Restrict who can push to this branch. Team and user restrictions are only available for organization-owned repositories. Set to null to disable.
+      restrictions: null
+
+  - name: teknoir-cloud
     # https://docs.github.com/en/rest/reference/repos#update-branch-protection
     # Branch Protection settings. Set to null to disable
     protection:
