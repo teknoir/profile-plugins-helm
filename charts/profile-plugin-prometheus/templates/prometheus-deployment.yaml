@@ -52,7 +52,7 @@ spec:
         {{- if .Values.thanos.enabled }}
         - name: prometheus-thanos-sidecar
           image: "{{ .Values.thanos.sidecar.image.registry }}:{{ .Values.thanos.sidecar.image.version }}"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           args:
             - sidecar
             - --tsdb.path=/data
@@ -80,7 +80,7 @@ spec:
         {{- end }}
         - name: prometheus
           image: "{{ .Values.prometheus.image.registry }}:{{ .Values.prometheus.image.version }}"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           args:
             - --storage.tsdb.retention.time=15d
             - --storage.tsdb.retention.size=15GB

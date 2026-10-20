@@ -6,7 +6,7 @@ persistentVolumeClaimSize: 10Gi
 jwks:
   image:
     registry: ghcr.io/teknoir/jwks-server
-    version: latest
+    version: "latest@sha256:b4f9e01f45de79bf48028e4056b270d5fdbf47a66a5e55ffe4755f0ead8f6301"
   resources:
     requests:
       cpu: 25m
@@ -15,7 +15,7 @@ jwks:
 redis:
   image:
     registry: redis/redis-stack-server
-    version: 6.2.6-v9
+    version: "6.2.6-v9@sha256:d0486c76e9907d7b179cedbd0a069a60b32eedc132d2c3b30c593f8777b7bca9"
   resources:
     requests:
       cpu: 25m

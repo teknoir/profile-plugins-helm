@@ -62,7 +62,7 @@ spec:
           {{- end }}
         - name: mongodb-exporter
           image: "{{ .Values.exporter.image.registry }}:{{ .Values.exporter.image.version }}"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9216
           args: ["--mongodb.uri=mongodb://$(MONGODB_USER):$(MONGODB_PASSWORD)@localhost:27017/admin", "--discovering-mode", "--collect-all", "--compatible-mode"]

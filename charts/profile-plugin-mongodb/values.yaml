@@ -4,7 +4,7 @@ persistentVolumeClaimSize: 100Gi
 mongodb:
   image:
     registry: mongo
-    version: 8.2.1
+    version: "8.2.1@sha256:e64a984d36b24419327c558b49a9100cf78191706222da6a7c8cf56a743ad3db"
   resources:
     requests:
       cpu: 25m
@@ -12,7 +12,7 @@ mongodb:
 exporter:
   image:
     registry: docker.io/percona/mongodb_exporter
-    version: 0.47
+    version: "0.47@sha256:022a27f0959568b9c329968563783dacae8344d05a12ef40e4a1a5f9eb47c158"
   resources:
     requests:
       cpu: 25m

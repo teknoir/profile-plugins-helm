@@ -4,11 +4,11 @@ persistentVolumeClaimSize: 15Gi
 configmapReload:
   image:
     registry: jimmidyson/configmap-reload
-    version: v0.9.0
+    version: "v0.9.0@sha256:f34fe394b1dab3982025c4107df5526ca773bc245adac7dbef877ccb5f5d5df5"
 prometheus:
   image:
     registry: quay.io/prometheus/prometheus
-    version: v2.52.0
+    version: "v2.52.0@sha256:5c435642ca4d8427ca26f4901c11114023004709037880cd7860d5b7176aa731"
 resources:
   requests:
     cpu: 25m
@@ -19,7 +19,7 @@ thanos:
   sidecar:
     image:
       registry: quay.io/thanos/thanos
-      version: v0.39.2
+      version: "v0.39.2@sha256:1d022ef4b8eff056a0e3b7822f953d931c5704d068413f2d7ce5266aa96c9e80"
     resources:
       requests:
         cpu: 25m
@@ -29,7 +29,7 @@ thanos:
     storage: 150Gi
     image:
       registry: quay.io/thanos/thanos
-      version: v0.39.2
+      version: "v0.39.2@sha256:1d022ef4b8eff056a0e3b7822f953d931c5704d068413f2d7ce5266aa96c9e80"
     resources:
       requests:
         cpu: 100m
@@ -37,7 +37,7 @@ thanos:
   query:
     image:
       registry: quay.io/thanos/thanos
-      version: v0.39.2
+      version: "v0.39.2@sha256:1d022ef4b8eff056a0e3b7822f953d931c5704d068413f2d7ce5266aa96c9e80"
     resources:
       requests:
         cpu: 100m
@@ -45,7 +45,7 @@ thanos:
   store:
     image:
       registry: quay.io/thanos/thanos
-      version: v0.39.2
+      version: "v0.39.2@sha256:1d022ef4b8eff056a0e3b7822f953d931c5704d068413f2d7ce5266aa96c9e80"
     resources:
       requests:
         cpu: 100m

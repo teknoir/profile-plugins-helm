@@ -29,7 +29,7 @@ spec:
       containers:
         - name: thanos-compactor
           image: "{{ .Values.thanos.compactor.image.registry }}:{{ .Values.thanos.compactor.image.version }}"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           args:
             - compact
             - --data-dir=/thanos/compact

@@ -28,7 +28,7 @@ spec:
       containers:
         - name: thanos-store
           image: "{{ .Values.thanos.store.image.registry }}:{{ .Values.thanos.store.image.version }}"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           args:
             - store
             - --data-dir=/tmp/thanos/store

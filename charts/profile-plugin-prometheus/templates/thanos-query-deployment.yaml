@@ -28,7 +28,7 @@ spec:
       containers:
         - name: thanos-query
           image: "{{ .Values.thanos.query.image.registry }}:{{ .Values.thanos.query.image.version }}"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           args:
             - query
             - --http-address=0.0.0.0:9090

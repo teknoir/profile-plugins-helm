@@ -5,9 +5,9 @@ emqx:
   replicaCount: 1
   image:
     registry: emqx/emqx
-    version: 5.8.9
+    version: "5.8.9@sha256:35b46f7aa7a0d51f3959e4344221ac5ec7f948b03e43099286b6c40a07bb393b"
     repository: emqx/emqx
-    tag: 5.8.9
+    tag: "5.8.9@sha256:35b46f7aa7a0d51f3959e4344221ac5ec7f948b03e43099286b6c40a07bb393b"
   persistence:
     enabled: true
     size: 1Gi

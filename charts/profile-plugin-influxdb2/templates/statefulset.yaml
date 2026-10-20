@@ -31,7 +31,7 @@ spec:
       containers:
         - name: influxdb2
           image: "{{ .Values.image.registry }}:{{ .Values.image.version }}"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           ports:
             - name: http
               containerPort: 8086

@@ -4,12 +4,12 @@ storageSize: 100Gi
 initPostgresConfig:
   image:
     registry: debian
-    version: bullseye-slim
+    version: "bullseye-slim@sha256:e5b6442dd2e9684cf5e87d8338b5968f3b348636fc0be6d7850a381e3731a2bd"
 
 postgres:
   image:
     registry: pgvector/pgvector
-    version: pg15
+    version: "pg15@sha256:47af0b65960b14f1c6945aa4ccae37836c632e9a6fe0eea9160936e616e5b2e9"
   resources:
     requests:
       cpu: 25m
@@ -18,7 +18,7 @@ postgres:
 exporter:
   image:
     registry: prometheuscommunity/postgres-exporter
-    version: latest
+    version: "latest@sha256:ac5ec343104fae0e2d84a27bb8d69b38430a11910c5382cad85d478d2bab713e"
   resources:
     requests:
       cpu: 25m
@@ -27,7 +27,7 @@ exporter:
 pgadmin:
   image:
     registry: dpage/pgadmin4
-    version: latest
+    version: "latest@sha256:c332c5f6dfba995d9ebc4af261d93506d6876085d712eaaa3defc8dd1a3f26de"
   resources:
     requests:
       cpu: 25m

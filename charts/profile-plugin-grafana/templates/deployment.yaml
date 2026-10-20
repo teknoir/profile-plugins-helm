@@ -35,7 +35,7 @@ spec:
       containers:
         - name: {{ .Values.name }}
           image: "{{ .Values.image.registry }}:{{ .Values.image.version }}"
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           env:
 {{/*            - name: GF_INSTALL_PLUGINS*/}}
 {{/*              value: "grafana-piechart-panel,grafana-worldmap-panel"*/}}

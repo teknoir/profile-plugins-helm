@@ -2,11 +2,11 @@ domain: teknoir.cloud
 deadend:
   image:
     registry: ghcr.io/teknoir/deadend
-    version: latest
+    version: "latest@sha256:1b2902ba84e5f4abd33961d04196228af5e0d784cd9a3df489ecec75ba41fb9b"
 tlsTerminator:
   image:
     registry: alpine
-    version: latest
+    version: "latest@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6"
 authorizedKeys: ""
 imagePullSecrets:
   - name: ghcr-token
