@@ -3331,6 +3331,17 @@ entries:
     version: 0.0.99
   - apiVersion: v2
     appVersion: v0.27.0
+    created: "2026-10-29T08:41:03.455185641Z"
+    description: HelmChart to deploy the Prometheus Alertmanager resources to a Teknoir
+      Cluster.
+    digest: 879afaa8ae0e367179a6090dc4f7c666d148ab76dd6435b2f670e697ec64d38b
+    name: profile-plugin-alertmanager
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-alertmanager-0.0.99-p3/profile-plugin-alertmanager-0.0.99-p3.tgz
+    version: 0.0.99-p3
+  - apiVersion: v2
+    appVersion: v0.27.0
     created: "2026-10-20T06:06:58.67039157Z"
     description: HelmChart to deploy the Prometheus Alertmanager resources to a Teknoir
       Cluster.
@@ -3673,6 +3684,17 @@ entries:
     version: 0.0.99
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-10-29T08:41:03.792741083Z"
+    description: HelmChart to deploy the default Claims and ClaimSets for user permissions
+      to a Teknoir Cluster.
+    digest: 34ac1c81f814867085e250b21144998202abcb9af75e70338425843ea880fbf6
+    name: profile-plugin-claims
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-claims-0.0.99-p3/profile-plugin-claims-0.0.99-p3.tgz
+    version: 0.0.99-p3
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-10-20T06:06:58.94685417Z"
     description: HelmChart to deploy the default Claims and ClaimSets for user permissions
       to a Teknoir Cluster.
@@ -4001,6 +4023,16 @@ entries:
     urls:
     - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-deadend-0.0.99/profile-plugin-deadend-0.0.99.tgz
     version: 0.0.99
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2026-10-29T08:41:04.198564254Z"
+    description: HelmChart to deploy the Deadend Bastion resources to a Teknoir Cluster.
+    digest: 809c9a4c452eb2bba8bcf3beb2774cd7f697bc12e2034cec4b848cd770414516
+    name: profile-plugin-deadend
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-deadend-0.0.99-p3/profile-plugin-deadend-0.0.99-p3.tgz
+    version: 0.0.99-p3
   - apiVersion: v2
     appVersion: 0.0.1
     created: "2026-10-20T06:06:59.294997986Z"
@@ -4980,6 +5012,20 @@ entries:
     urls:
     - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-emqx-0.0.99/profile-plugin-emqx-0.0.99.tgz
     version: 0.0.99
+  - apiVersion: v2
+    appVersion: v5.8.9
+    created: "2026-10-29T08:41:04.524636694Z"
+    dependencies:
+    - name: emqx
+      repository: https://repos.emqx.io/charts
+      version: 5.8.9
+    description: A Helm chart for EMQX used by Profile Controller
+    digest: 97e2507ba62baf0f66071db04ad691f85df3dd7803d2d9de5e6f840c74d7248f
+    name: profile-plugin-emqx
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-emqx-0.0.99-p3/profile-plugin-emqx-0.0.99-p3.tgz
+    version: 0.0.99-p3
   - apiVersion: v2
     appVersion: v5.8.9
     created: "2026-10-20T06:06:59.609116609Z"
@@ -6417,6 +6463,17 @@ entries:
     version: 0.0.99
   - apiVersion: v2
     appVersion: master
+    created: "2026-10-29T08:41:04.817881648Z"
+    description: HelmChart to deploy the Fleet Metrics monitoring resources to a Teknoir
+      Cluster.
+    digest: ddd4dbc5a272dd97d1338f6eceb39c1d015391599a7fd53e916c27fdcb785802
+    name: profile-plugin-fleet-metrics
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-fleet-metrics-0.0.99-p3/profile-plugin-fleet-metrics-0.0.99-p3.tgz
+    version: 0.0.99-p3
+  - apiVersion: v2
+    appVersion: master
     created: "2026-10-20T06:06:59.934062525Z"
     description: HelmChart to deploy the Fleet Metrics monitoring resources to a Teknoir
       Cluster.
@@ -6745,6 +6802,16 @@ entries:
     urls:
     - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-grafana-0.0.99/profile-plugin-grafana-0.0.99.tgz
     version: 0.0.99
+  - apiVersion: v2
+    appVersion: 12.3.3
+    created: "2026-10-29T08:41:05.139373899Z"
+    description: A Helm chart for Grafana used by Profile Controller
+    digest: bffd44e0f9b6088307ce14aec54d0a90a2356f9927d710f804bf29f5d7769aea
+    name: profile-plugin-grafana
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-grafana-0.0.99-p3/profile-plugin-grafana-0.0.99-p3.tgz
+    version: 0.0.99-p3
   - apiVersion: v2
     appVersion: 12.3.3
     created: "2026-10-20T06:07:00.259882222Z"
@@ -7770,6 +7837,17 @@ entries:
     version: 0.0.99
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-10-29T08:41:05.466485122Z"
+    description: A Helm chart for the Historian plugin (API, Middle-End, Synchronizer
+      and MongoDB)
+    digest: 4cd995c70100d8cfb22680b09dbfe9b8956fe4bb0d647a80c495117bd998a942
+    name: profile-plugin-historian
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-historian-0.0.99-p3/profile-plugin-historian-0.0.99-p3.tgz
+    version: 0.0.99-p3
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-10-20T06:07:00.612386017Z"
     description: A Helm chart for the Historian plugin (API, Middle-End, Synchronizer
       and MongoDB)
@@ -8474,6 +8552,16 @@ entries:
     version: 0.0.99
   - apiVersion: v2
     appVersion: 2.7-alpine
+    created: "2026-10-29T08:41:05.804746889Z"
+    description: A Helm chart for the InfluxDB2 plugin
+    digest: 2fce4e3d83bf99965ab7a7e63be612a7a8d9c6816408369ef787ecd5154afbab
+    name: profile-plugin-influxdb2
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-influxdb2-0.0.99-p3/profile-plugin-influxdb2-0.0.99-p3.tgz
+    version: 0.0.99-p3
+  - apiVersion: v2
+    appVersion: 2.7-alpine
     created: "2026-10-20T06:07:00.978392515Z"
     description: A Helm chart for the InfluxDB2 plugin
     digest: a6c96bc9db6652686bf8ea459bb002f7b3363e2ec73fbb37a3d28f3739b077bd
@@ -8785,6 +8873,16 @@ entries:
     version: 0.0.99
   - apiVersion: v2
     appVersion: main
+    created: "2026-10-29T08:41:06.124268522Z"
+    description: HelmChart to deploy the JWKS server resources to a Teknoir Cluster.
+    digest: 7214b7ada934c33038cce8cd12e7ecb6c0f54e5518eee58194eeb66cc5420797
+    name: profile-plugin-jwks
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-jwks-0.0.99-p3/profile-plugin-jwks-0.0.99-p3.tgz
+    version: 0.0.99-p3
+  - apiVersion: v2
+    appVersion: main
     created: "2026-10-20T06:07:01.257183299Z"
     description: HelmChart to deploy the JWKS server resources to a Teknoir Cluster.
     digest: 537d1cc29b2e0dc826cca510c5611710d1943f1cd877f819d8896f9c78a974a8
@@ -9094,6 +9192,16 @@ entries:
     urls:
     - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-mongodb-0.0.99/profile-plugin-mongodb-0.0.99.tgz
     version: 0.0.99
+  - apiVersion: v2
+    appVersion: v8.2.1
+    created: "2026-10-29T08:41:06.509766984Z"
+    description: A Helm chart for MongoDB used by Profile Controller
+    digest: bae3319d90e7b58b9ce561f22f17f5df23a732a76f8b1df99fabd508085e1c10
+    name: profile-plugin-mongodb
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-mongodb-0.0.99-p3/profile-plugin-mongodb-0.0.99-p3.tgz
+    version: 0.0.99-p3
   - apiVersion: v2
     appVersion: v8.2.1
     created: "2026-10-20T06:07:01.536931988Z"
@@ -10129,6 +10237,17 @@ entries:
     version: 0.0.99
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-10-29T08:41:06.807676892Z"
+    description: Observatory system for monitoring and evaluating detections from
+      devices.
+    digest: 5515923ba6077b9637572366e30d4b899f43db03786cf36266e29c1e09dd5b07
+    name: profile-plugin-observatory
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-observatory-0.0.99-p3/profile-plugin-observatory-0.0.99-p3.tgz
+    version: 0.0.99-p3
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-10-20T06:07:01.830656871Z"
     description: Observatory system for monitoring and evaluating detections from
       devices.
@@ -10823,6 +10942,17 @@ entries:
     version: 0.0.99
   - apiVersion: v2
     appVersion: pg15
+    created: "2026-10-29T08:41:07.115562467Z"
+    description: HelmChart to deploy the PostgreSQL database resources to a Teknoir
+      Cluster.
+    digest: 001366859c4cd1dd85ac4a0e826570956aed8e7ae52c25170e6974a19ab6355f
+    name: profile-plugin-postgres
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-postgres-0.0.99-p3/profile-plugin-postgres-0.0.99-p3.tgz
+    version: 0.0.99-p3
+  - apiVersion: v2
+    appVersion: pg15
     created: "2026-10-20T06:07:02.120587325Z"
     description: HelmChart to deploy the PostgreSQL database resources to a Teknoir
       Cluster.
@@ -11151,6 +11281,16 @@ entries:
     urls:
     - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-prometheus-0.0.99/profile-plugin-prometheus-0.0.99.tgz
     version: 0.0.99
+  - apiVersion: v2
+    appVersion: v2.47.0
+    created: "2026-10-29T08:41:07.495601177Z"
+    description: A Helm chart for Prometheus used by Profile Controller
+    digest: 2b341782a77b440b0df1ee99e3b0d3d0e07c6c62476fc9d7be6f6ba199309c73
+    name: profile-plugin-prometheus
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-prometheus-0.0.99-p3/profile-plugin-prometheus-0.0.99-p3.tgz
+    version: 0.0.99-p3
   - apiVersion: v2
     appVersion: v2.47.0
     created: "2026-10-20T06:07:02.412387661Z"
@@ -12266,6 +12406,17 @@ entries:
     version: 0.0.99
   - apiVersion: v2
     appVersion: main
+    created: "2026-10-29T08:41:07.895520191Z"
+    description: HelmChart to deploy the UserAlerts monitoring resources to a Teknoir
+      Cluster.
+    digest: 8cde4163ad5e989249f91c5eb589dc860c4667a58461548666572451e755b905
+    name: profile-plugin-useralerts
+    type: application
+    urls:
+    - https://github.com/teknoir/profile-plugins-helm/releases/download/profile-plugin-useralerts-0.0.99-p3/profile-plugin-useralerts-0.0.99-p3.tgz
+    version: 0.0.99-p3
+  - apiVersion: v2
+    appVersion: main
     created: "2026-10-20T06:07:02.756084828Z"
     description: HelmChart to deploy the UserAlerts monitoring resources to a Teknoir
       Cluster.
@@ -13234,4 +13385,4 @@ entries:
     urls:
     - https://github.com/teknoir/profile-controller-helm/releases/download/user-controller-0.0.5/user-controller-0.0.5.tgz
     version: 0.0.5
-generated: "2026-10-23T08:07:04.829294387Z"
+generated: "2026-10-29T08:41:07.897256722Z"
