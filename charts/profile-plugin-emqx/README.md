@@ -31,20 +31,14 @@ the next one, anything else is final):
    device-controller, Backstage). A wrong password for `teknoir` is a hard stop.
 2. HTTP, `POST http://jwks:8083/api/v1/mqtt/authn` (profile-plugin-jwks): jwks-server verifies
    the device's RS256 token against the one key stored for that username, checks `aud` and `exp`,
-   and requires clientid = username. A device key can no longer log in as another device.
+   and requires clientid = username.
    In `observe` mode (profile-plugin-jwks `mqttAuth.authnMode`) a failure answers "ignore" and
    logs `mqtt_authn decision=would_deny`; in `enforce` it answers "deny". A pass is never a
-   superuser, so a token's `is_superuser` or `acl` claim has no effect.
-3. Legacy JWT (`use_jwks`, the union key set at `/api/v1/keys`, `aud` checked): the fallback while
-   observing. Every client that authenticator 2 answers "ignore" reaches it: every observe
-   failure at 0.0.112, and a jwks 503, timeout or Istio 403 at 0.0.113 and 0.0.114. Its
-   `acl_claim_name` is set to an unused name (`x_teknoir_unused_acl`), which only drops tokens
-   that use the claim name `acl`. It is not a mitigation: a device signs its own token and the
-   claim name is public, so through this authenticator it can still assert its own ACL (with
-   `x_teknoir_unused_acl`, checked before the ACL file) or `is_superuser` (which skips every
-   authorization source). This is the same exposure as before 0.0.112. It ends when 0.0.115
-   removes authenticator 3, after which the chain fails closed; until then the soak watches that
-   `authorization.superuser` does not increase.
+   superuser and carries no ACL.
+3. Legacy JWT (`use_jwks`, the union key set at `/api/v1/keys`, `aud` checked): a temporary
+   fallback for clients that authenticator 2 answers "ignore" (every observe failure at 0.0.112,
+   and a jwks error or timeout at 0.0.113 and 0.0.114). 0.0.115 removes it, after which the chain
+   fails closed.
 
 Only the EMQX pod's mTLS principal (`<trustDomain>/ns/<ns>/sa/emqx`) may call
 `/api/v1/mqtt/*` on jwks (profile-plugin-jwks `jwks-mqtt-auth` DENY); EMQX is not a key writer.

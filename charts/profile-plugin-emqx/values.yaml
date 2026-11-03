@@ -92,8 +92,7 @@ emqx:
     EMQX_AUTHENTICATION__3__FROM: "password"
     EMQX_AUTHENTICATION__3__REFRESH_INTERVAL: "60"
     EMQX_AUTHENTICATION__3__SSL__ENABLE: "false"
-    # Drops only tokens that use the claim name "acl". A device signs its own token, so through
-    # authenticator 3 it can still assert x_teknoir_unused_acl or is_superuser until 0.0.115.
+    # Legacy fallback only (README "MQTT authentication and authorization"); 0.0.115 removes it.
     EMQX_AUTHENTICATION__3__ACL_CLAIM_NAME: "x_teknoir_unused_acl"
     EMQX_AUTHENTICATION__3__VERIFY_CLAIMS: '{aud= \"teknoir\"}'
     # Authorization: the chart's ACL file (templates/acl-configmap.yaml), then the jwks audit sink,

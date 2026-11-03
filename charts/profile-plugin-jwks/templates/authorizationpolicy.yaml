@@ -39,13 +39,10 @@ spec:
               {{- end }}
       {{- end }}
 ---
-# The MQTT endpoints answer whether a device token is valid for a name, so only
-# EMQX may call them: anything else on /api/v1/mqtt/* (other in-namespace pods,
-# which the namespace-wide ALLOW admits, and plaintext callers, which have no
-# principal) is denied. This alone does not stop a token oracle: Istio does not
-# decode %2F, so a GET on /api/v1/mqtt%2Fauthn misses both DENYs and matches the
-# open GET ALLOW, and gorilla/mux routes on the decoded path. The protection also
-# relies on jwks-server's mqtt handlers accepting POST only (405 otherwise).
+# The MQTT endpoints are for EMQX only: anything else on /api/v1/mqtt/* (other
+# in-namespace pods, which the namespace-wide ALLOW admits, and plaintext
+# callers, which have no principal) is denied. jwks-server's handlers also
+# accept POST only and refuse percent-encoded paths.
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
