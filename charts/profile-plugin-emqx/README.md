@@ -55,9 +55,11 @@ Everything else falls to `authorization.no_match`. The file has no allow-all lin
 only a change of the env ConfigMap rolls the pod, so the file name carries the first 12 hex
 digits of the content's sha256: an ACL change changes `SOURCES__1__PATH` and restarts EMQX.
 
-While observing, source 2 is an HTTP audit sink, `POST http://jwks:8083/api/v1/mqtt/authz-audit`.
-It sees only requests the file did not decide, always answers "ignore", and jwks-server logs them
-as `mqtt_authz_audit decision=would_deny`. `no_match` is `allow`, so nothing is refused yet.
+In 0.0.112 and 0.0.113, source 2 was an HTTP audit sink,
+`POST http://jwks:8083/api/v1/mqtt/authz-audit`. It saw only requests the file did not decide,
+always answered "ignore", and jwks-server logged them as `mqtt_authz_audit decision=would_deny`;
+`no_match` was `allow`, so nothing was refused. From 0.0.114 there is no source 2 and
+`authorization.no_match` is `deny`: whatever the file does not allow is refused.
 Do not set `mqtt.use_username_as_clientid`: platform clients share the user `teknoir` with
 distinct clientids and would take over each other's sessions.
 
@@ -70,8 +72,11 @@ distinct clientids and would take over each other's sessions.
 | 0.0.114 authz enforce | `enforce` | `deny` | removed | yes | EMQX |
 | 0.0.115 fail closed | `enforce` | `deny` | removed | removed | EMQX |
 
-Who would be denied while observing:
+Who would have been denied while observing (0.0.112 and 0.0.113):
 `kubectl -n <ns> logs deploy/jwks -c jwks | grep -E 'mqtt_(authn|authz_audit)' | grep -v decision=allow`.
+
+From 0.0.114, refused requests show in the EMQX log:
+`kubectl -n <ns> logs emqx-0 -c emqx | grep -E 'authorization_permission_denied|cannot_publish_to_topic_due_to_not_authorized'`.
 
 **Rollback.** Pin the previous plugin chart version (profile-controller `pluginChartVersion`
 through a staging release); EMQX and jwks get the old env and image back exactly. Do not change
@@ -84,6 +89,36 @@ Tests: `helm unittest` (`tests/mqtt_auth_test.yaml`), and `tests/acl-check.sh` (
 then docker `emqx/emqx:5.8.9`: the file parses, every rule compiles with EMQX's own rule compiler,
 and a username/action/topic matrix gives the expected allow, deny or no-match; `--check` skips
 docker).
+
+## Retained messages
+
+From 0.0.114 the retainer stores retained messages on disc
+(`emqx.emqxConfig.EMQX_RETAINER__BACKEND__STORAGE_TYPE: "disc"`) in `/opt/emqx/data` on the
+`emqx-data` PersistentVolumeClaim, so they survive a restart of `emqx-0`. Before, they were in
+memory and every restart dropped them; device-controller republishes a device's config only when
+it changes, so devices that reconnected after a restart got no config until the next change.
+
+The first boot with `disc` converts the retainer tables in place. Messages that were only in
+memory before that restart are gone once more (one-time).
+
+No cap and no expiry are set: device configs never expire, and only the platform user publishes
+retained messages (devices may not retain, see the ACL), so there is about one retained topic per
+device. The config of a deleted device stays until it is removed (below).
+
+Inspect:
+
+    kubectl -n <ns> exec emqx-0 -c emqx -- emqx ctl retainer info
+    kubectl -n <ns> exec emqx-0 -c emqx -- emqx ctl retainer topics
+
+Remove one:
+
+    kubectl -n <ns> exec emqx-0 -c emqx -- emqx ctl retainer clean <topic>
+
+**Rollback.** An older chart (no `EMQX_RETAINER__BACKEND__STORAGE_TYPE`) boots with `ram` again:
+EMQX converts the tables back, and the retained messages are lost at the next restart after that.
+Do not change the retainer through the EMQX API or dashboard: a runtime change is saved in
+`cluster.hocon` on the volume and would outlive a chart rollback that only removes the env var;
+to force `ram`, set the env var to `"ram"` explicitly.
 
 ## Dashboard: no EMQX login, owners only
 
