@@ -95,19 +95,17 @@ emqx:
     # Legacy fallback only (README "MQTT authentication and authorization"); 0.0.115 removes it.
     EMQX_AUTHENTICATION__3__ACL_CLAIM_NAME: "x_teknoir_unused_acl"
     EMQX_AUTHENTICATION__3__VERIFY_CLAIMS: '{aud= \"teknoir\"}'
-    # Authorization: the chart's ACL file (templates/acl-configmap.yaml), then the jwks audit sink,
-    # which only sees what the file did not allow and logs it as would_deny.
-    EMQX_AUTHORIZATION__NO_MATCH: "allow"                  # 0.0.114: "deny"
+    # Authorization: the chart's ACL file (templates/acl-configmap.yaml).
+    EMQX_AUTHORIZATION__NO_MATCH: "deny"                   # whatever the ACL file does not allow is refused
     EMQX_AUTHORIZATION__DENY_ACTION: "ignore"
     EMQX_AUTHORIZATION__SOURCES__1__TYPE: "file"
     EMQX_AUTHORIZATION__SOURCES__1__ENABLE: "true"
     EMQX_AUTHORIZATION__SOURCES__1__PATH: '/opt/emqx-acl/{{ include "teknoir.emqx.aclFile" . }}'
-    EMQX_AUTHORIZATION__SOURCES__2__TYPE: "http"           # observe only; removed in 0.0.114
-    EMQX_AUTHORIZATION__SOURCES__2__ENABLE: "true"
-    EMQX_AUTHORIZATION__SOURCES__2__METHOD: "post"
-    EMQX_AUTHORIZATION__SOURCES__2__URL: "http://jwks:8083/api/v1/mqtt/authz-audit"
-    EMQX_AUTHORIZATION__SOURCES__2__REQUEST_TIMEOUT: "2s"
-    EMQX_AUTHORIZATION__SOURCES__2__BODY: {username: "${username}", clientid: "${clientid}", topic: "${topic}", action: "${action}", qos: "${qos}", retain: "${retain}"}
+    # Retained messages are stored on disc (the emqx-data volume at /opt/emqx/data), so they
+    # survive an EMQX restart. device-controller publishes each device's config as a retained
+    # message on /devices/<device>/config and republishes it only when the config changes.
+    # EMQX converts its retainer tables to disc at the first boot with this value. ram or disc.
+    EMQX_RETAINER__BACKEND__STORAGE_TYPE: "disc"
     # Do not set EMQX_MQTT__USE_USERNAME_AS_CLIENTID: platform clients share the user teknoir with
     # distinct clientids and would take over each other's sessions.
     # EMQX 5 name of the intended 3 MB limit (the former EMQX_MAX_PACKET_SIZE is not an
