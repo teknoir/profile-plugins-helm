@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Offline chart tests: helm unittest of every chart with tests/*_test.yaml (dependencies built first when missing)
+# and the render checks of charts/profile-plugin-emqx/tests/acl-check.sh (--check). The docker and k3d tests in
+# charts/profile-plugin-emqx/tests are not run here; see that chart's README.
+#   scripts/test
+# Output: verbose for humans and CI. Under a coding agent (CLAUDECODE, AI_AGENT, Codex) it prints the totals and,
+# on failure, the failure details (without the PASS/ok lines). The full log is always in .test-logs/ (git-ignored).
+set -uo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")/.." || exit 1
+
+is_agent() { case "${AI_AGENT:-}" in 0|false|no|off) return 1;; "") ;; *) return 0;; esac
+  [ -n "${CLAUDECODE:-}${CODEX_THREAD_ID:-}${CODEX_SANDBOX:-}${GEMINI_CLI:-}${CURSOR_AGENT:-}${OPENCODE:-}" ]; }
+
+run_tests() {
+  local rc=0 charts=() t c
+  for t in charts/*/tests; do
+    compgen -G "$t/*_test.yaml" >/dev/null || continue
+    c=${t%/tests}; charts+=("$c")
+    if grep -q "^dependencies:" "$c/Chart.yaml" && ! compgen -G "$c/charts/*.tgz" >/dev/null; then
+      helm dependency build "$c" >/dev/null || { echo "FAIL: helm dependency build $c"; rc=1; }
+    fi
+  done
+  echo "== helm unittest"
+  helm unittest "${charts[@]}" 2>&1 || rc=1
+  echo "== emqx ACL render checks"
+  bash charts/profile-plugin-emqx/tests/acl-check.sh --check 2>&1 || rc=1
+  return "$rc"
+}
+
+export NO_COLOR=1
+mkdir -p .test-logs; log=".test-logs/test-$(date +%Y%m%d-%H%M%S)-$$.log"
+if is_agent; then
+  run_tests >"$log" 2>&1; rc=$?
+  grep -E "^(Charts|Test Suites|Tests):|^check: |^FAIL: helm dependency" "$log"
+  [ "$rc" -eq 0 ] || grep -vE "^ PASS |^ok |^$" "$log" | tail -n 150
+else
+  run_tests 2>&1 | tee "$log"; rc=${PIPESTATUS[0]}
+fi
+echo "exit=$rc full log: $log"
+exit "$rc"
