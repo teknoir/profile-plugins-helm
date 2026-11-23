@@ -1,0 +1,35 @@
+# Generated from charts/ci/files/repos/profile-plugins-helm.yaml on 2026-11-23 by plans/cicd/migrate/gen_callers.py
+# Edit freely afterwards; re-running the generator overwrites this file.
+name: image
+
+# Public image: ghcr.io/teknoir/<image>:sha-<8>, plus :<tag> for a v* tag on
+# main, built on a hosted runner.
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+    paths: ['images/stunnel/**']
+  workflow_dispatch:
+
+concurrency:
+  group: image-${{ github.sha }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  image:
+    uses: teknoir/ci-workflows/.github/workflows/image.yml@main
+    with:
+      image: stunnel
+      context: images/stunnel
+      file: images/stunnel/Dockerfile
+      platforms: linux/amd64,linux/arm64
+      version-file: images/stunnel/VERSION
+      visibility: public
+      runs-on: ubuntu-latest
+      timeout-minutes: 90
+    permissions:
+      contents: read
+      packages: write
