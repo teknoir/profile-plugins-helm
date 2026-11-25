@@ -36,13 +36,10 @@ mqttAuth:
 jwks:
   image:
     registry: ghcr.io/teknoir/jwks-server
-    # jwks-server branch mqtt-auth (MQTT authn endpoint); main has not merged it yet.
-    # PLACEHOLDER for 0.0.113-p1: this image has no GET /api/v1/keys/legacy and ignores
-    # LEGACY_KEYS_EXCLUDE_PREFIXES. Pin the image built from jwks-server branch
-    # tb-fence-legacy-keys (sha-<8>@sha256:<digest>) before this chart is merged; the RELEASE GATE
-    # test in tests/mqtt_auth_test.yaml fails until then. Never pin a tag that cannot be pulled:
-    # jwks is one replica with strategy Recreate.
-    version: sha-de5c5ed8@sha256:403771123fa3486a10fee3ac7dcd60a9ef4d1d3d8b63b13299afd09eb5525437
+    # jwks-server main 425041a3 (#13): MQTT authn endpoint and GET /api/v1/keys/legacy with
+    # LEGACY_KEYS_EXCLUDE_PREFIXES. linux/amd64 manifest digest. Never pin a tag that cannot be
+    # pulled: jwks is one replica with strategy Recreate.
+    version: sha-425041a3@sha256:c3414743e135e2363bba003702dc5676c04e1184f6a9d3ea2cf233501a717575
   resources:
     requests:
       cpu: 25m
