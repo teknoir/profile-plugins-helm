@@ -73,7 +73,7 @@ distinct clientids and would take over each other's sessions.
 | 0.0.112 observe | `observe` | `allow` | yes | yes | EMQX, jwks |
 | 0.0.113 authn enforce | `enforce` | `allow` | yes | yes | jwks |
 | 0.0.113-p1 legacy key set | `enforce` | `allow` | yes | yes, still `/api/v1/keys`; jwks adds `/api/v1/keys/legacy` without `tb-` ids (`mqttAuth.legacyExcludePrefixes`) | jwks (EMQX renders as 0.0.113) |
-| 0.0.113-p2 TeknoirBot fence | `enforce` | `allow` | yes | yes, `/api/v1/keys/legacy` (no `tb-` keys) | EMQX (ACL file with the `tb-` rules, authenticator 3 endpoint, retainer on disc) |
+| 0.0.113-p2 TeknoirBot fence | `enforce` | `allow` | yes | yes, `/api/v1/keys/legacy` (no `tb-` keys) | EMQX (ACL file with the `tb-` rules, authenticator 3 endpoint, retainer on disc with a 3MB payload limit) |
 | 0.0.114 authz enforce | `enforce` | `deny` | removed | yes | EMQX |
 | 0.0.115 fail closed | `enforce` | `deny` | removed | removed | EMQX |
 
@@ -144,9 +144,16 @@ it changes, so devices that reconnected after a restart got no config until the 
 The first boot with `disc` converts the retainer tables in place. Messages that were only in
 memory before that restart are gone once more (one-time).
 
-No cap and no expiry are set: device configs never expire, and only the platform user publishes
-retained messages (devices may not retain, see the ACL), so there is about one retained topic per
-device. The config of a deleted device stays until it is removed (below).
+No count limit and no expiry are set: device configs never expire, and only the platform user
+publishes retained messages (devices may not retain, see the ACL), so there is about one retained
+topic per device. The config of a deleted device stays until it is removed (below).
+
+The largest retained payload is 3MB (`EMQX_RETAINER__MAX_PAYLOAD_SIZE`), the same as the largest
+packet (`EMQX_MQTT__MAX_PACKET_SIZE`). EMQX's default is 1MB: a config between 1MB and 3MB was
+delivered to a connected device but never retained, so the device lost it at its next connect.
+`GET /api/v5/mqtt/retainer/message/<topic>` leaves the payload out of a message that large (seen
+in the rig at 2 and 3 MB); the list (`/api/v5/mqtt/retainer/messages?topic=<topic>`) still
+shows it.
 
 Inspect:
 
@@ -159,9 +166,12 @@ Remove one:
 
 **Rollback.** An older chart (no `EMQX_RETAINER__BACKEND__STORAGE_TYPE`, 0.0.113-p1 and before)
 boots with `ram` again: EMQX converts the tables back, and the retained messages are lost at the
-next restart after that. Do not change the retainer through the EMQX API or dashboard: a runtime
-change is saved in `cluster.hocon` on the volume and would outlive a chart rollback that only
-removes the env var; to force `ram`, set the env var to `"ram"` explicitly.
+next restart after that. The payload limit goes back to 1MB too: a stored config over 1MB is
+still delivered until that restart, but a new one over 1MB is not retained (EMQX logs
+`retain_failed_for_payload_size_exceeded_limit`). Do not change the retainer through the EMQX
+API or dashboard: a runtime change is saved in `cluster.hocon` on the volume and would outlive a
+chart rollback that only removes the env var; to force `ram`, set the env var to `"ram"`
+explicitly.
 
 ## Dashboard: no EMQX login, owners only
 

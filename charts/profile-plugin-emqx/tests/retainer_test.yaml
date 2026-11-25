@@ -15,15 +15,23 @@ tests:
           path: data.EMQX_RETAINER__BACKEND__STORAGE_TYPE
           value: disc
 
-  - it: no retainer limit or expiry is set
+  - it: no retainer count limit or expiry is set
     template: charts/emqx/templates/configmap.yaml
     asserts:
       - notExists:
           path: data.EMQX_RETAINER__BACKEND__MAX_RETAINED_MESSAGES
       - notExists:
           path: data.EMQX_RETAINER__MSG_EXPIRY_INTERVAL
-      - notExists:
+
+  - it: the retainer keeps payloads up to the max packet size (3MB, not the 1MB default)
+    template: charts/emqx/templates/configmap.yaml
+    asserts:
+      - equal:
           path: data.EMQX_RETAINER__MAX_PAYLOAD_SIZE
+          value: 3MB
+      - equal:
+          path: data.EMQX_MQTT__MAX_PACKET_SIZE
+          value: 3MB
 
   - it: the EMQX data directory is on a persistent volume
     template: charts/emqx/templates/StatefulSet.yaml

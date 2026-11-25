@@ -116,6 +116,9 @@ emqx:
     # message on /devices/<device>/config and republishes it only when the config changes.
     # EMQX converts its retainer tables to disc at the first boot with this value. ram or disc.
     EMQX_RETAINER__BACKEND__STORAGE_TYPE: "disc"
+    # The largest retained payload, the same as EMQX_MQTT__MAX_PACKET_SIZE below. The EMQX
+    # default is 1MB: a larger config would be delivered once but never retained.
+    EMQX_RETAINER__MAX_PAYLOAD_SIZE: "3MB"
     # Do not set EMQX_MQTT__USE_USERNAME_AS_CLIENTID: platform clients share the user teknoir with
     # distinct clientids and would take over each other's sessions.
     # EMQX 5 name of the intended 3 MB limit (the former EMQX_MAX_PACKET_SIZE is not an
