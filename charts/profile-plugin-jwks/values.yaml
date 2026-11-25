@@ -20,15 +20,28 @@ authorization:
 #   audience: the "aud" a device token must carry (exact match).
 #   emqxServiceAccount: the ServiceAccount of the EMQX pod in this namespace; only its mTLS
 #     principal may call /api/v1/mqtt/*.
+#   legacyExcludePrefixes: device ids with these prefixes are left out of GET
+#     /api/v1/keys/legacy, the key set EMQX's legacy JWT authenticator (authenticator 3) reads
+#     from profile-plugin-emqx 0.0.113-p2 on; /api/v1/keys stays complete. tb- is the reserved
+#     prefix of TeknoirBot computers (Device tb-<bot>), so a bot key never passes the legacy
+#     fallback. Rendered as LEGACY_KEYS_EXCLUDE_PREFIXES (comma-separated, left out when the list
+#     is empty, then the legacy set equals /api/v1/keys). Each item must match
+#     ^[a-z0-9][a-z0-9.-]{0,62}$, or the render fails (jwks-server refuses to start on it).
 mqttAuth:
   authnMode: enforce
   audience: teknoir
   emqxServiceAccount: emqx
+  legacyExcludePrefixes: ["tb-"]
 
 jwks:
   image:
     registry: ghcr.io/teknoir/jwks-server
     # jwks-server branch mqtt-auth (MQTT authn endpoint); main has not merged it yet.
+    # PLACEHOLDER for 0.0.113-p1: this image has no GET /api/v1/keys/legacy and ignores
+    # LEGACY_KEYS_EXCLUDE_PREFIXES. Pin the image built from jwks-server branch
+    # tb-fence-legacy-keys (sha-<8>@sha256:<digest>) before this chart is merged; the RELEASE GATE
+    # test in tests/mqtt_auth_test.yaml fails until then. Never pin a tag that cannot be pulled:
+    # jwks is one replica with strategy Recreate.
     version: sha-de5c5ed8@sha256:403771123fa3486a10fee3ac7dcd60a9ef4d1d3d8b63b13299afd09eb5525437
   resources:
     requests:
